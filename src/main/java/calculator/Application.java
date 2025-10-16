@@ -12,6 +12,11 @@ public class Application {
 
         for (String num : nums) {
             int readNum = Integer.parseInt(num);
+
+            if (readNum < 0) {
+                throw new IllegalArgumentException();
+            }
+
             sum += readNum;
         }
 
