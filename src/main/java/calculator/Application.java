@@ -6,7 +6,7 @@ public class Application {
     public static void main(String[] args) {
         String input = readLine();
 
-        String[] nums = input.split(",");
+        String[] nums = input.split("[,:]");
 
         int sum = 0;
 
