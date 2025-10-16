@@ -13,6 +13,8 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
+            run("//;123123\\n1;1231232;1231233");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -49,6 +51,9 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+//    @Test
+//    void 구분자가_두개
 
     @Override
     public void runMain() {
