@@ -29,6 +29,8 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1,2,3,4");
             assertThat(output()).contains("결과 : 10");
+            run("1:2:3:4");
+            assertThat(output()).contains("결과 : 10");
         });
     }
 
