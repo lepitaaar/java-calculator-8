@@ -6,7 +6,15 @@ public class Application {
     public static void main(String[] args) {
         String input = readLine();
 
-        String[] nums = input.split("[,:]");
+        String splitRegex = "[,:]";
+
+        if (input.startsWith("//")) {
+            int endIndex = input.indexOf("\\n");
+            splitRegex = input.substring(2, endIndex);
+            input = input.substring(endIndex + 2);
+        }
+
+        String[] nums = input.split(splitRegex);
 
         int sum = 0;
 
