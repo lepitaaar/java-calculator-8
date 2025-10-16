@@ -34,6 +34,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자가_공백일시_예외를_반환한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 문자를_입력할시_예외를_반환한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,a,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
