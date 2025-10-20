@@ -16,7 +16,7 @@ public class Numbers {
             throw new IllegalArgumentException(ErrorMsg.EMPTY_STRING.getMessage());
         }
 
-        if (input.startsWith("//")) {
+        if (Regex.usingCustomDelimiter(input)) {
             int endIndex = input.indexOf("\\n");
             String delimiter = input.substring(2, endIndex);
 
@@ -24,8 +24,8 @@ public class Numbers {
                 throw new IllegalArgumentException(ErrorMsg.EMPTY_DELIMITER.getMessage());
             }
             input = input.substring(endIndex + 2);
-            System.out.println(input);
-            if (input.matches("\\Q//\\E.*\\Q\\n\\E")) {
+
+            if (Regex.usingCustomDelimiter(input)) {
                 throw new IllegalArgumentException(ErrorMsg.MULTIPLE_CUSTOM_DELIMITERS.getMessage());
             }
 
