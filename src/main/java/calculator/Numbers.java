@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.constant.ErrorMsg;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,7 @@ public class Numbers {
 
     public Numbers(String input) {
         if (input.isBlank()) {
-            throw new IllegalArgumentException("입력값은 필수 입니다.");
+            throw new IllegalArgumentException(ErrorMsg.EMPTY_STRING.getMessage());
         }
 
         if (input.startsWith("//")) {
@@ -19,11 +21,15 @@ public class Numbers {
             String delimiter = input.substring(2, endIndex);
 
             if (delimiter.isBlank()) {
-                throw new IllegalArgumentException("커스텀 구분자가 필요합니다.");
+                throw new IllegalArgumentException(ErrorMsg.EMPTY_DELIMITER.getMessage());
+            }
+            input = input.substring(endIndex + 2);
+            System.out.println(input);
+            if (input.matches("\\Q//\\E.*\\Q\\n\\E")) {
+                throw new IllegalArgumentException(ErrorMsg.MULTIPLE_CUSTOM_DELIMITERS.getMessage());
             }
 
             addDelimiter(delimiter);
-            input = input.substring(endIndex + 2);
         }
 
         String[] nums = input.split(getDelimiter());
@@ -37,7 +43,7 @@ public class Numbers {
 
     private void validateNumber(int i) {
         if (i < 0) {
-            throw new IllegalArgumentException("양의 정수여야 합니다.");
+            throw new IllegalArgumentException(ErrorMsg.NEGATIVE_NUMBER.getMessage());
         }
     }
 
