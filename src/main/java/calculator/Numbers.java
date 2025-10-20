@@ -25,11 +25,17 @@ public class Numbers {
         try {
             for (String num : nums) {
                 int i = Integer.parseInt(num);
-
+                validateNumber(i);
                 addNumber(i);
             }
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    private void validateNumber(int i) {
+        if (i < 0) {
+            throw new IllegalArgumentException("양의 정수여야 합니다.");
         }
     }
 
