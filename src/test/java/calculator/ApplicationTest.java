@@ -47,7 +47,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력값이_없을경우_예외를_반환한다() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(""))
+                assertThatThrownBy(() -> runException(" "))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
