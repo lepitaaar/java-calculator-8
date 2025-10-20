@@ -16,7 +16,13 @@ public class Numbers {
 
         if (input.startsWith("//")) {
             int endIndex = input.indexOf("\\n");
-            addDelimiter(input.substring(2, endIndex));
+            String delimiter = input.substring(2, endIndex);
+
+            if (delimiter.isBlank()) {
+                throw new IllegalArgumentException("커스텀 구분자가 필요합니다.");
+            }
+
+            addDelimiter(delimiter);
             input = input.substring(endIndex + 2);
         }
 
