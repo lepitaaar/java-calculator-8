@@ -52,8 +52,17 @@ class ApplicationTest extends NsTest {
         );
     }
 
-//    @Test
-//    void 구분자가_두개
+    @Test
+    void 구분자를_두개_이상_입력시_예외를_발생한다() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;\\n//2\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException("//;\\n//2\\n//3\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException("//;\\n//2\\n//3\\n2;4"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
 
     @Override
     public void runMain() {
