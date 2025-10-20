@@ -22,14 +22,10 @@ public class Numbers {
 
         String[] nums = input.split(getDelimiter());
 
-        try {
-            for (String num : nums) {
-                int i = Integer.parseInt(num);
-                validateNumber(i);
-                addNumber(i);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
+        for (String num : nums) {
+            int i = Integer.parseInt(num);
+            validateNumber(i);
+            addNumber(i);
         }
     }
 
