@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
@@ -15,18 +17,14 @@ public class Application {
         }
 
         String[] nums = input.split(splitRegex);
-
-        int sum = 0;
-
-        for (String num : nums) {
-            int readNum = Integer.parseInt(num);
-
-            if (readNum < 0) {
-                throw new IllegalArgumentException();
-            }
-
-            sum += readNum;
-        }
+        
+        int sum = Arrays.stream(nums)
+                .map(Integer::parseInt)
+                .mapToInt(Integer::intValue)
+                .peek(n -> {
+                    if (n < 0) throw new IllegalArgumentException();
+                })
+                .sum();
 
         System.out.println("결과 : " + sum);
 
