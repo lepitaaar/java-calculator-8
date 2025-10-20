@@ -10,6 +10,10 @@ public class Numbers {
     private final List<Integer> numbers;
 
     public Numbers(String input) {
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("입력값은 필수 입니다.");
+        }
+
         if (input.startsWith("//")) {
             int endIndex = input.indexOf("\\n");
             addDelimiter(input.substring(2, endIndex));
