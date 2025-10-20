@@ -37,6 +37,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자와_기존_구분자를_같이_사용할_수_있다() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2:3;4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 숫자가_공백일시_예외를_반환한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,,3"))
@@ -60,6 +68,14 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("//;\\n//2\\n//3\\n"))
                     .isInstanceOf(IllegalArgumentException.class);
             assertThatThrownBy(() -> runException("//;\\n//2\\n//3\\n2;4"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 소수를_입력시_예외를_발생한다() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1.1,1.2,1.3"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
