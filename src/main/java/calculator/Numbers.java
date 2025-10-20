@@ -7,7 +7,7 @@ import java.util.List;
 public class Numbers {
     private final String[] DEFAULT_DELIMITERS = new String[]{",", ":"};
     private final List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITERS));
-    private final List<Integer> numbers;
+    private final List<Integer> numbers = new ArrayList<>();
 
     public Numbers(String input) {
         if (input.isBlank()) {
@@ -21,9 +21,20 @@ public class Numbers {
         }
 
         String[] nums = input.split(getDelimiter());
-        this.numbers = Arrays.stream(nums)
-                .map(Integer::parseInt)
-                .toList();
+
+        try {
+            for (String num : nums) {
+                int i = Integer.parseInt(num);
+
+                addNumber(i);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void addNumber(int i) {
+        numbers.add(i);
     }
 
     public void addDelimiter(String delimiter) {
