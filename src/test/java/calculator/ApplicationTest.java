@@ -45,6 +45,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 입력값이_없을경우_합은_0이다() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자의_값이_존재하지않으면_예외를_반환한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 숫자가_공백일시_예외를_반환한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,,3"))
