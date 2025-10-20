@@ -45,11 +45,11 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 입력값이_없을경우_합은_0이다() {
-        assertSimpleTest(() -> {
-            run("");
-            assertThat(output()).contains("결과 : 0");
-        });
+    void 입력값이_없을경우_예외를_반환한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(""))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
